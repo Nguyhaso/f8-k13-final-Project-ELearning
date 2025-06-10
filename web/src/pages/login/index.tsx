@@ -6,13 +6,13 @@ import {
   Flex,
   Heading, HStack,
   Image,
-  Input, Link,
+  Input,
   Stack,
   Text,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { PasswordInput } from "../../components/ui/password-input.tsx";
-import {Link as RouterLink} from "react-router";
+import {useNavigate} from "react-router";
 
 export default function LoginHeader() {
   interface FormValues {
@@ -28,6 +28,7 @@ export default function LoginHeader() {
 
   const onSubmit = handleSubmit((data) => console.log(data));
 
+ const navigate = useNavigate();
   return (
     <Flex
       minH="100vh"
@@ -78,9 +79,9 @@ export default function LoginHeader() {
             <Checkbox.Label>Remember me</Checkbox.Label>
           </Checkbox.Root>
 
-            <Box fontSize="sm" color="blue.500" as={RouterLink} to="/register" _hover={{ textDecoration: "underline" }}>
+            <Button onClick={()=>navigate("/register")}>
               Register
-            </Box>
+            </Button>
           </HStack>
           <Button type="submit" colorScheme="blue" width="full">
             Login
