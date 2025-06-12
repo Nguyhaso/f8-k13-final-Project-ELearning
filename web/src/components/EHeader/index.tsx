@@ -18,7 +18,7 @@ export default function Eheader({pageName, user}: EheaderProps) {
   console.log('121')
 
   return (
-    <Flex justify="space-between">
+    <Flex justify="space-between" p={'12px'} bg={'white'}>
       <HStack
       >
         <HStack justify={'flex-start'} mr={'100px'}>
@@ -54,7 +54,7 @@ export default function Eheader({pageName, user}: EheaderProps) {
         <Button size="sm" bg="white" _hover={{bg: "blue.100"}} padding="10px" color="blue.500">
           <BsHouse/> Home
         </Button>
-        <Flex align={'center'} gap={'8px'} mr={'12px'}>
+        <Flex align={'center'} gap={'8px'} >
           <HStack key={user.name} gap="4">
             <Avatar.Root>
               <Avatar.Fallback name={user.name}/>
