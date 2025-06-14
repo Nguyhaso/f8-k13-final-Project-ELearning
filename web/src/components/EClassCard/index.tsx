@@ -6,11 +6,12 @@ interface EClassProps {
   classNumberOfMember?: number,
   classCode?: any,
   classWidth?: number,
+  navigateToClass: ()=>void
 }
-export default function ({className, classNumberOfMember, classCode, classWidth}: EClassProps) {
+export default function ({className, classNumberOfMember, classCode, navigateToClass}: EClassProps) {
 
   return (
-  <Flex direction="column" p={'12px'} color={'white'} bg={'blue.500'} rounded={'2xl'} w={classWidth}>
+  <Flex direction="column" p={'12px'} color={'white'} bg={'blue.500'} rounded={'2xl'}>
     <HStack justify="space-between">
       <Text fontSize={'xl'} fontWeight="bold">{className}</Text>
       <Button
@@ -19,6 +20,7 @@ export default function ({className, classNumberOfMember, classCode, classWidth}
         _hover={{bg: "blue.600"}}
         size="sm"
         padding="10px"
+        onClick={()=>navigateToClass()}
       >
         <BsDoorOpen/>
         Enter Class

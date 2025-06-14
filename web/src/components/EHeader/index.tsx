@@ -1,6 +1,7 @@
 import {Avatar, Menu, Button, Flex, Portal, HStack, Image, Stack, Text, VStack} from "@chakra-ui/react";
 import {BsHouse, BsPlusLg} from "react-icons/bs";
 import {LuChevronDown} from "react-icons/lu";
+import {useNavigate} from "react-router";
 
 interface User {
   avatar: string;
@@ -15,8 +16,7 @@ interface EheaderProps {
 
 
 export default function Eheader({pageName, user}: EheaderProps) {
-  console.log('121')
-
+const navigate = useNavigate();
   return (
     <Flex justify="space-between" p={'12px'} bg={'white'}>
       <HStack
@@ -34,10 +34,10 @@ export default function Eheader({pageName, user}: EheaderProps) {
               <Text fontSize="24px" fontWeight="bold"> BK</Text>
               <Text fontSize="24px" fontWeight="bold" color="yellow.500">Star</Text>
             </Flex>
-            <Text>{pageName}</Text>
+            <Text>Classroom</Text>
           </VStack>
         </HStack>
-        <Text fontWeight={'bolder'}>HomePage</Text>
+        <Text fontWeight={'bolder'}>{pageName}</Text>
       </HStack>
       <Flex justify={'space-between'} align={'center'} gap={'8px'}>
         <Button
@@ -51,7 +51,9 @@ export default function Eheader({pageName, user}: EheaderProps) {
           <BsPlusLg/>
           Create Class
         </Button>
-        <Button size="sm" bg="white" _hover={{bg: "blue.100"}} padding="10px" color="blue.500">
+        <Button size="sm" bg="white" _hover={{bg: "blue.100"}} padding="10px" color="blue.500"
+        onClick={()=>navigate('/classes')}
+        >
           <BsHouse/> Home
         </Button>
         <Flex align={'center'} gap={'8px'} >

@@ -1,5 +1,6 @@
-import {Box, Wrap} from '@chakra-ui/react';
-import {EHeader, ESearch, EClass} from '../../components'
+import {Box, SimpleGrid} from '@chakra-ui/react';
+import {EHeader, ESearch, EClassCard} from '../../components'
+import { useNavigate } from 'react-router';
 
 export default function (){
   const className: string = "Ahihi Class"
@@ -17,25 +18,27 @@ export default function (){
     {className: 'Class 4', classNumberOfMember: 5, classCode: '876zs4'},
     {className: 'Class 5', classNumberOfMember: 45, classCode: 'g6f3ds'},
   ]
-
-  const screenWidth = document.documentElement.clientWidth;
-  console.log(screenWidth)
-  const classWidth= (screenWidth - 24 * 4 -1 ) / 3
+ const navigate = useNavigate();
   return (
     <Box bg={'gray.50'}>
     <EHeader pageName={className} user={user}></EHeader>
     <ESearch searchName={'Class List'} searchButton={'Add Class'}></ESearch>
-      <Wrap gap={'24px'} p={'24px'}>
-        {classList.map((item) => (
-          <EClass className={item.className}
+      <SimpleGrid
+        columns={{ base: 1, md: 2, lg: 3 }}
+        gap={'6'}
+        // minChildWidth={'sm'}
+        p={'6'}
+      >
+        {classList.map((item, index) => (
+          <EClassCard className={item.className}
                   classNumberOfMember={item.classNumberOfMember}
                   classCode={item.classCode}
-                  classWidth={classWidth}
+                  key={index}
+                  navigateToClass={()=>navigate(`/class/${item.classCode}`)}
           />
-
         ))}
 
-      </Wrap>
+      </SimpleGrid>
 
     </Box>
   )
