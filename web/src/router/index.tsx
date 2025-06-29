@@ -7,32 +7,47 @@ import Classes from '../pages/classes'
 import Class from "../pages/class";
 import Members from "../pages/members";
 import Exams from "../pages/exams";
+import {ProtectedLayout} from "../components";
 
 
 const router = createBrowserRouter([
   {
     path: "/login",
-    element: <LoginPage/>,
+    element:
+    <ProtectedLayout>
+      <LoginPage/>
+    </ProtectedLayout>,
   },
   {
     path: "/register",
-    element: <Register/>,
+    element:
+      <ProtectedLayout>
+      <Register/>
+      </ProtectedLayout>,
   },
   {
     path: "/classes",
-    element: <Classes/>,
+    element:
+      <Classes/>
+
   },
   {
     path: "/class/:id",
-    element: <Class/>,
+    element:
+      <Class/>
+
   },
   {
     path: "/class/:id/members",
-    element: <Members/>,
+    element:
+      <Members/>
+
   },
   {
     path: "/class/:id/exams",
-    element: <Exams/>,
+    element:
+      <Exams/>
+
   },
 ]);
 export default router;

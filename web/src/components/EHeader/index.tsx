@@ -47,6 +47,7 @@ const navigate = useNavigate();
           _hover={{bg: "blue.100"}}
           size="sm"
           padding="10px"
+          onClick={()=>navigate('/class/add')}
         >
           <BsPlusLg/>
           Create Class

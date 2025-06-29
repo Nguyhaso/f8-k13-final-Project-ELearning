@@ -1,6 +1,7 @@
 import {EHeader, ESideBar, ERecentActivities, EClassStat, EClassInfor, EClassMemberList} from "../../components";
-import {Box, Grid, GridItem, VStack} from "@chakra-ui/react";
+import {Box, Flex, Grid, GridItem, Heading, VStack} from "@chakra-ui/react";
 import {useParams} from "react-router";
+import EAddClass from "../../components/EAddClass";
 
 export default function () {
   const user = {
@@ -21,9 +22,29 @@ export default function () {
     },
   ]
   const {id} = useParams()
+
+  if (id === 'add'){
+    return (
+      <Box>
+        <EHeader user={user}></EHeader>
+        <Heading p={'24px'}>Add new class</Heading>
+        <Flex justify={'center'} align={'center'} height={'calc(100vh - 200px)'}>
+        <EAddClass/>
+        </Flex>
+      </Box>
+    )
+  }
   return (
     <Box>
       <EHeader user={user}></EHeader>
+
+      {/*if (id === 'add')*/}
+      {/*return (*/}
+      {/*<>*/}
+      {/*<p>ahihi</p>*/}
+      {/*</>*/}
+      {/*)*/}
+      {/*else return (*/}
       <ESideBar classCode={id ?? 'default'}></ESideBar>
       <Grid templateColumns={'repeat(4,1fr)'}
             ml={'200px'}
@@ -41,6 +62,7 @@ export default function () {
           <ERecentActivities activities={recentActivities}/>
         </GridItem>
       </Grid>
+      {/*)*/}
     </Box>
   )
 }

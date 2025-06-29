@@ -13,7 +13,7 @@ export default function ({className, classNumberOfMember, classCode, navigateToC
   return (
   <Flex direction="column" p={'12px'} color={'white'} bg={'blue.500'} rounded={'2xl'}>
     <HStack justify="space-between">
-      <Text fontSize={'xl'} fontWeight="bold">{className}</Text>
+      <Text fontSize={'xl'} fontWeight="bold">Class : {className}</Text>
       <Button
         bg="blue.500"
         color="white"

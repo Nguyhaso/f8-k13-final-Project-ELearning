@@ -11,31 +11,48 @@ import {
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { PasswordInput } from "../../components/ui/password-input.tsx";
-import {useNavigate} from "react-router";
+import { useNavigate} from "react-router";
+import {postMethod} from "../../ulti";
 
 export default function LoginHeader() {
   interface FormValues {
-    username: string;
+    email: string;
     password: string;
   }
-
+const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>();
 
-  const onSubmit = handleSubmit((data) => console.log(data));
+  const onSubmit = handleSubmit(async (data) => {
+    console.log(data)
+    const res= await postMethod('/login/', data)
+    if (res) {
+      localStorage.setItem('accessToken', res.access)
+      localStorage.setItem('refreshToken', res.refresh)
+      navigate('/classes')
+  }})
 
- const navigate = useNavigate();
+
   return (
     <Flex
       minH="100vh"
-      direction="column"
       align="center"
       justify="center"
-      px={4}
+      bg="white"
     >
+      <Flex
+        direction="column"
+        p={14}
+        align="center"
+        justify="center"
+        bg="gray.50"
+        rounded={'2xl'}
+        borderWidth="1px"
+
+      >
       <Flex>
         <Image
           src="https://bk-exam-public.s3.ap-southeast-1.amazonaws.com/logo2.png"
@@ -61,9 +78,9 @@ export default function LoginHeader() {
 
       <form onSubmit={onSubmit} style={{ width: "100%", maxWidth: "400px" }}>
         <Stack gap="4" align="stretch">
-          <Field.Root invalid={!!errors.username}>
-            <Input placeholder="Enter Email" {...register("username")} />
-            <Field.ErrorText>{errors.username?.message}</Field.ErrorText>
+          <Field.Root invalid={!!errors.email}>
+            <Input placeholder="Enter Email" autoFocus {...register("email")} />
+            <Field.ErrorText>{errors.email?.message}</Field.ErrorText>
           </Field.Root>
 
           <Field.Root invalid={!!errors.password}>
@@ -87,6 +104,7 @@ export default function LoginHeader() {
           </Button>
         </Stack>
       </form>
+      </Flex>
     </Flex>
   );
 }

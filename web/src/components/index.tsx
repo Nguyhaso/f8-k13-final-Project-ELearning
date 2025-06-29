@@ -7,3 +7,6 @@ export {default as EClassStat} from './EClassStat'
 export {default as EClassInfor} from './EClassInfor'
 export {default as EClassMemberList} from './EClassMemberList'
 export {default as EExamCard} from './EExamCard'
+export {default as ProtectedLayout} from './ProtectedLayout'
+export {default as EAddclass} from './EAddClass'
+

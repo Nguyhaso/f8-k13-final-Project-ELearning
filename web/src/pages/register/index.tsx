@@ -1,6 +1,7 @@
 import {Box, Button, Field, Flex, Heading, HStack, Image, Input, Stack, Text} from "@chakra-ui/react";
 import {useForm} from "react-hook-form";
 import {PasswordInput} from "../../components/ui/password-input.tsx";
+import {postMethod} from "../../ulti";
 
 interface FormValues {
   name: string;
@@ -17,7 +18,20 @@ export default function () {
       getValues,
     } = useForm<FormValues>()
 
-  const onSubmit = handleSubmit ((data)=> console.log(data))
+  const onSubmit = handleSubmit (async (data)=> {
+    const dataSubmit = {
+      name: data.name,
+      email: data.email,
+      role: "student",
+      status: "confirming",
+      password: data.password,
+    }
+
+    await postMethod('/master/user/',dataSubmit)
+    console.log(dataSubmit)
+
+  })
+
   return (
     <Flex
       direction="column"
