@@ -2,23 +2,15 @@ import {Avatar, Menu, Button, Flex, Portal, HStack, Image, Stack, Text, VStack} 
 import {BsHouse, BsPlusLg} from "react-icons/bs";
 import {LuChevronDown} from "react-icons/lu";
 import {useNavigate} from "react-router";
+import {logOut, type EheaderProps} from "../../ulti";
 
-interface User {
-  avatar: string;
-  name: string;
-  role: string;
-}
 
-interface EheaderProps {
-  pageName?: string;
-  user: User
-}
 
 
 export default function Eheader({pageName, user}: EheaderProps) {
 const navigate = useNavigate();
   return (
-    <Flex justify="space-between" p={'12px'} bg={'white'}>
+    <Flex justify="space-between" p={'12px'} bg={'white'} >
       <HStack
       >
         <HStack justify={'flex-start'} mr={'100px'}>
@@ -61,7 +53,7 @@ const navigate = useNavigate();
           <HStack key={user.name} gap="4">
             <Avatar.Root>
               <Avatar.Fallback name={user.name}/>
-              <Avatar.Image src={user.avatar}/>
+              <Avatar.Image src={user.avata.url || "https://via.placeholder.com/150"}/>
             </Avatar.Root>
             <Stack gap="0">
               <Text fontWeight="medium">{user.name}</Text>
@@ -80,7 +72,7 @@ const navigate = useNavigate();
               <Menu.Positioner>
                 <Menu.Content>
                   <Menu.Item value="userInfor">User Information</Menu.Item>
-                  <Menu.Item value="logOut">Logout</Menu.Item>
+                  <Menu.Item value="logOut" onClick={()=>logOut(navigate)} >Logout</Menu.Item>
 
                 </Menu.Content>
               </Menu.Positioner>

@@ -14,27 +14,31 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element:
-    <ProtectedLayout>
-      <LoginPage/>
-    </ProtectedLayout>,
+      <ProtectedLayout>
+        <LoginPage/>
+      </ProtectedLayout>,
   },
   {
     path: "/register",
     element:
       <ProtectedLayout>
-      <Register/>
+        <Register/>
       </ProtectedLayout>,
   },
   {
     path: "/classes",
     element:
-      <Classes/>
+      <ProtectedLayout>
+        <Classes/>
+      </ProtectedLayout>
 
   },
   {
     path: "/class/:id",
     element:
-      <Class/>
+      <ProtectedLayout>
+        <Class/>
+      </ProtectedLayout>
 
   },
   {

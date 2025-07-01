@@ -1,87 +1,84 @@
-import {useEffect, useState} from "react";
-import {Spinner, Flex, Text} from "@chakra-ui/react";
+import {createContext, useEffect, useState} from "react";
 import {useLocation, useNavigate} from "react-router";
-import { postMethod} from "../../ulti";
+import {LoadingScreen} from "../index.tsx";
+import {decode, getNewToken, type TableContextType, type UserProps} from "../../ulti";
 
+
+export const TableContext = createContext<TableContextType | null>(null)
 export default function ProtectedLayout({children}: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
-  const [authorized, setAuthorized] = useState(false);
+  const [user, setUser] = useState<UserProps>(
+    {
+      id: 1,
+      name: 'admin',
+      email: 'admin@gmail',
+      role: 'admin',
+      avata: {
+        id:  1,
+        url:  'https://via.placeholder.com/150'
+      }
+    })
+  ;
+
   const location = useLocation();
   const navigate = useNavigate();
 
+  const accessToken = localStorage.getItem("accessToken");
+  const refreshToken = localStorage.getItem("refreshToken");
+
+  const provider = {accessToken, refreshToken, loading, setLoading, user}
   const publicPaths = ["/login", "/register"];
 
   useEffect(() => {
       const checkToken = async () => {
-          const currentPath = location.pathname;
-          if (publicPaths.includes(currentPath)) {
-            setLoading(false);
-            setAuthorized(true);
+        const currentPath = location.pathname;
+        if (publicPaths.includes(currentPath)) {
+          setLoading(false);
+          return;
+        }
+        if (!accessToken || !refreshToken) {
+          navigate('/login');
+          return null;
+        }
+
+        try {
+          const decoded: any = decode(accessToken);
+          const now = Date.now() / 1000;
+          if (decoded.exp < now) {
+            const newTokenData = await getNewToken(refreshToken);
+            localStorage.setItem('accessToken', newTokenData.data.access);
+            console.warn("Access token expired");
             return;
           }
 
-          const accessToken = localStorage.getItem("accessToken");
-          const refreshToken = localStorage.getItem("refreshToken");
-
-          if (!accessToken || !refreshToken) {
-            navigate('/login');
-            return null;
-          }
-        try {
-          const res =  await postMethod(`/login/get_new_token`,{refresh: refreshToken});
-          if (res?.status === 200) {
-            setAuthorized(true);
-            localStorage.setItem('accessToken', res.data.access)
-            localStorage.setItem('refreshToken', res.data.refresh)
-          } else {
-            navigate("/login");
-          }
-        } catch {
+          setUser({
+            id: decoded.id,
+            name: decoded.name,
+            email: decoded.email,
+            role: decoded.role,
+            avata: decoded.avata,
+          });
+        } catch (e) {
+          console.error("Invalid token");
           navigate("/login");
+          return;
         } finally {
           setLoading(false);
         }
-      };
+        setLoading(false);
 
-      //     try {
-      //       const checkAccessToken = await getPost(accessToken)
-      //       return null;
-      //     } catch (error:any) {
-      //
-      //       if (error?.response?.data?.detail === 'token expired')
-      //         try {
-      //           const res = await postMethod("/login/get_new_token/", {refresh: refreshToken})
-      //           if (res?.status === 200) {
-      //             setAuthorized(true);
-      //             localStorage.setItem('accessToken', res.data.access)
-      //             localStorage.setItem('refreshToken', res.data.refresh)
-      //           } else {
-      //             navigate("/login");
-      //           }
-      //         } catch {
-      //           navigate("/login");
-      //         }
-      //     } finally {
-      //       setLoading(false);
-      //     }
-      //   }
-      // ;
-
-    checkToken().catch(console.error);
-    }, [location.pathname]
+      }
+      checkToken().catch(console.error);
+    }, []
   )
   ;
 
   if (loading) {
     return (
-      <Flex minH="100vh" justify="center" align="center" direction="column">
-        <Spinner size="xl" color="blue.500"/>
-        <Text mt={4}>Đang xác thực phiên đăng nhập...</Text>
-      </Flex>
+      <LoadingScreen/>
     );
   }
 
-  if (!authorized) return null;
 
-  return <>{children}</>;
+  return <TableContext.Provider value={provider}>{children}</TableContext.Provider>;
 }

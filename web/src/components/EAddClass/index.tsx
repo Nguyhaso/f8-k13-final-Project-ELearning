@@ -66,56 +66,62 @@ export default function () {
 
   const navigate = useNavigate()
 
+  const pressEnter=(e:React.FormEvent)=>{
+    e.preventDefault();
+    onCreate()
+  }
   return (
-    <VStack p={'24px'} bg={'white'} rounded={'xl'} w={'500px'}>
-      <Field.Root required invalid={!!PayloadError.className}>
-        <Field.Label>
-          Class name <Field.RequiredIndicator/>
-        </Field.Label>
-        <Input placeholder="Enter Class name"
-               variant="outline"
-               colorPalette={'blue'}
-               _invalid={{ borderColor: "red.500", boxShadow: "0 0 0 1px red" }}
-               borderColor={'blue.500'}
-               onChange={(e) => setPayload({...payload, className: e.target.value})}
-        />
-        <Field.ErrorText>{PayloadError.className}</Field.ErrorText>
-      </Field.Root>
-      <Field.Root required invalid={!!PayloadError.securityCode}>
-        <Field.Label>
-          Security Code <Field.RequiredIndicator/>
-        </Field.Label>
-        <Input placeholder="Enter Security Code"
-               variant="outline"
-               colorPalette={'blue'}
-               _invalid={{ borderColor: "red.500", boxShadow: "0 0 0 1px red" }}
-               borderColor={'blue.500'}
-               onChange={(e) => setPayload({...payload, securityCode: e.target.value})}
+    <form onSubmit={pressEnter}>
+      <VStack p={'24px'} bg={'white'} rounded={'xl'} w={'500px'}>
+        <Field.Root required invalid={!!PayloadError.className}>
+          <Field.Label>
+            Class name <Field.RequiredIndicator/>
+          </Field.Label>
+          <Input placeholder="Enter Class name"
+                 variant="outline"
+                 colorPalette={'blue'}
+                 _invalid={{ borderColor: "red.500", boxShadow: "0 0 0 1px red" }}
+                 borderColor={'blue.500'}
+                 onChange={(e) => setPayload({...payload, className: e.target.value})}
+          />
+          <Field.ErrorText>{PayloadError.className}</Field.ErrorText>
+        </Field.Root>
+        <Field.Root required invalid={!!PayloadError.securityCode}>
+          <Field.Label>
+            Security Code <Field.RequiredIndicator/>
+          </Field.Label>
+          <Input placeholder="Enter Security Code"
+                 variant="outline"
+                 colorPalette={'blue'}
+                 _invalid={{ borderColor: "red.500", boxShadow: "0 0 0 1px red" }}
+                 borderColor={'blue.500'}
+                 onChange={(e) => setPayload({...payload, securityCode: e.target.value})}
 
-        />
-        <Field.ErrorText>{PayloadError.securityCode}</Field.ErrorText>
-      </Field.Root>
-      <HStack>
-        <Button
-          borderColor="blue.400"
-          color="blue.500"
-          bg="white"
-          _hover={{bg: "whitesmoke"}}
-          size="sm"
-          padding="xl"
-          onClick={()=>navigate('/classes')}
-        >Cancel</Button>
-        <Button
-          borderColor="blue.400"
-          bg="blue.500"
-          color="white"
-          _hover={{bg: "blue.700"}}
-          size="sm"
-          padding="xl"
-          onClick={onCreate}
-        >Create</Button>
-      </HStack>
-    </VStack>
+          />
+          <Field.ErrorText>{PayloadError.securityCode}</Field.ErrorText>
+        </Field.Root>
+        <HStack>
+          <Button
+            borderColor="blue.400"
+            color="blue.500"
+            bg="white"
+            _hover={{bg: "whitesmoke"}}
+            size="sm"
+            padding="xl"
+            onClick={()=>navigate('/classes')}
+          >Cancel</Button>
+          <Button
+            type={'submit'}
+            borderColor="blue.400"
+            bg="blue.500"
+            color="white"
+            _hover={{bg: "blue.700"}}
+            size="sm"
+            padding="xl"
+          >Create</Button>
+        </HStack>
+      </VStack>
+    </form>
   )
 }
 
