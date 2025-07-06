@@ -6,7 +6,7 @@ import Register from '../pages/register'
 import Classes from '../pages/classes'
 import Class from "../pages/class";
 import Members from "../pages/members";
-import Exams from "../pages/exams";
+import Exams from "../pages/examGroups";
 import {ProtectedLayout} from "../components";
 
 
@@ -44,13 +44,19 @@ const router = createBrowserRouter([
   {
     path: "/class/:id/members",
     element:
-      <Members/>
+      <ProtectedLayout>
+        <Members/>
+      </ProtectedLayout>
+
 
   },
   {
     path: "/class/:id/exams",
     element:
-      <Exams/>
+      <ProtectedLayout>
+        <Exams/>
+      </ProtectedLayout>
+
 
   },
 ]);

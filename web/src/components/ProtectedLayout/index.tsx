@@ -38,6 +38,8 @@ export default function ProtectedLayout({children}: { children: React.ReactNode 
         }
         if (!accessToken || !refreshToken) {
           navigate('/login');
+          setLoading(false);
+
           return null;
         }
 
