@@ -29,9 +29,10 @@ export const postMethod = async (endpoint: string, payload: any) => {
     return data
   } catch (e) {
     failedMsg()
+    throw e
+
   }
 
-  return null
 }
 
 export const putMethod = async (endpoint: string, payload: any) => {
