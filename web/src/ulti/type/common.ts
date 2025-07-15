@@ -46,3 +46,10 @@ export interface ExamGroupInfor {
   is_once: boolean,
   is_save_local: boolean
 }
+
+export interface ExamGroupPayload{
+  name: string;
+  await_time: number;
+  start_time: string;
+
+}

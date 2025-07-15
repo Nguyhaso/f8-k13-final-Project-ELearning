@@ -5,8 +5,9 @@ import { useNavigate } from "react-router";
 interface ESearchProps {
   searchName?: string,
   searchButton?: string,
+  onclick?: () => void,
 }
-export default function ({searchName, searchButton}: ESearchProps) {
+export default function ({searchName, searchButton,onclick}: ESearchProps) {
   const navigate = useNavigate();
   return (
     <Flex justify={'space-between'} p={'12px'} align={'center'}>
@@ -23,7 +24,7 @@ export default function ({searchName, searchButton}: ESearchProps) {
           color="white"
           _hover={{bg: "yellow.500"}}
           padding="10px"
-          onClick={()=>navigate('/class/add')}
+          onClick={onclick ?? (()=>navigate('/class/add'))}
         >
           <BsPlusLg/>
           {searchButton}
