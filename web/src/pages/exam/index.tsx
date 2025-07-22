@@ -1,22 +1,15 @@
-import {
-  EHeader,
-  ESideBar,
-  ERecentActivities,
-  TableContext, EClassInforCombined, EUploadFile, EAddExam
-} from "../../components";
-import {Box, Flex, Grid, GridItem, Heading, SimpleGrid} from "@chakra-ui/react";
+import {EAddClass, EAddExam, EHeader, ESideBar, EUploadFile, TableContext} from "../../components";
+import {Box, Flex, Heading, SimpleGrid} from "@chakra-ui/react";
 import {useParams} from "react-router";
-import {EAddClass} from "../../components";
-import {useContext, useEffect, useState} from "react";
-import {type ClassInfor, getPost} from "../../ulti";
+import {useContext} from "react";
 
 
 export default function () {
-  const {id, exam} = useParams()
+  const {id} = useParams()
 
 
   const injector: any = useContext(TableContext)
-  const {accessToken, user} = injector
+  const { user} = injector
 
 
   if (id === 'add') {

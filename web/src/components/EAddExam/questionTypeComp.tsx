@@ -1,14 +1,11 @@
 import {
   Checkbox,
   CheckboxGroup,
-  createListCollection, Field,
+   Field,
   Fieldset,
-  Flex,
   HStack, Input,
-  Portal,
   RadioGroup,
-  Select,
-  NativeSelect, Text, Heading, Stack
+  NativeSelect, Text,  Stack
 } from "@chakra-ui/react";
 
 export default function ({type,index,onChange, onAnswer}:any)  {

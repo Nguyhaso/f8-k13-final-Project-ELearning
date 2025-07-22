@@ -1,15 +1,6 @@
-import {
-  Box,
-  Button,
-  Text,
-  VStack,
-  useBreakpointValue,
-  Drawer,
-  IconButton, Portal
-} from "@chakra-ui/react";
+import {Box, Button, Drawer, IconButton, Portal, Text, useBreakpointValue, VStack} from "@chakra-ui/react";
 import {useNavigate} from "react-router";
-import {BsGlobe2, BsPeople, BsTrophy, BsList, BsStack, BsHammer} from "react-icons/bs";
-import {LuHam} from "react-icons/lu";
+import {BsGlobe2, BsList, BsPeople, BsTrophy} from "react-icons/bs";
 
 export default function Sidebar({classCode}: { classCode: string }) {
   const navigate = useNavigate();

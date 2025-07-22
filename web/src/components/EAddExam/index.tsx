@@ -1,16 +1,4 @@
-import {
-  Box,
-  Button,
-  Field,
-  Input,
-  NumberInput,
-  Portal,
-  Select,
-  SimpleGrid,
-  VStack,
-  createListCollection,
-  Flex
-} from "@chakra-ui/react";
+import {Box, Button, Field, Input, NumberInput, SimpleGrid} from "@chakra-ui/react";
 import {useEffect, useState} from "react";
 import {type examPayloadProp, type payloadErrorProp} from "../../ulti";
 import QuestionTypeComp from "./questionTypeComp.tsx";
