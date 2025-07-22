@@ -126,6 +126,7 @@ export default function () {
           {examGroupList.map((item, index) => (
             <EExamCard
               key={index}
+              examId={item.id}
               title={item.name}
               startDate={item.start_time}
             />

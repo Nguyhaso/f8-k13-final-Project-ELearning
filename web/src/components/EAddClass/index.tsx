@@ -49,7 +49,7 @@ export default function () {
         currentToken = newTokenData.data.access;
       }
       const payload1 = {name: payload.className, code: payload.securityCode, users: [decoded.id]};
-      console.log(payload1);
+      // console.log(payload1);
       //api post data
       try {
         await postBearerMethod('/master/class', payload1, currentToken)

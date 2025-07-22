@@ -53,3 +53,29 @@ export interface ExamGroupPayload{
   start_time: string;
 
 }
+
+interface questionProp{
+  type: string;
+  correct_answer: string;
+  index: number;
+}
+
+export interface examPayloadProp{
+  name: string;
+  code: string;
+  exam_group: number;
+  number_of_question: number;
+  total_time: number;
+  correct_answer: {};
+  question: questionProp[] ;
+  description: string;
+  file: string;
+  deleted_question: string;
+}
+
+export interface payloadErrorProp {
+  name?: string | null;
+  code?: string | null;
+  total_time?: string | null;
+  number_of_question?: string | null;
+}
