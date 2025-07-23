@@ -15,7 +15,7 @@ export default function () {
 
 
   const injector: any = useContext(TableContext)
-  const{accessToken,user} = injector
+  const{user} = injector
 
 
 
