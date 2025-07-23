@@ -7,7 +7,7 @@ import {Box, Flex, Heading} from "@chakra-ui/react";
 import {useParams} from "react-router";
 import {EAddClass} from "../../components";
 import {useContext} from "react";
-import {type ClassInfor, getPost} from "../../ulti";
+
 
 
 export default function () {
