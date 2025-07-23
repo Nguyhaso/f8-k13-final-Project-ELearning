@@ -1,13 +1,12 @@
 import {
   EHeader,
   ESideBar,
-  ERecentActivities,
-  TableContext, EClassInforCombined
+  TableContext
 } from "../../components";
-import {Box, Flex, Grid, GridItem, Heading} from "@chakra-ui/react";
+import {Box, Flex, Heading} from "@chakra-ui/react";
 import {useParams} from "react-router";
 import {EAddClass} from "../../components";
-import {useContext, useEffect, useState} from "react";
+import {useContext} from "react";
 import {type ClassInfor, getPost} from "../../ulti";
 
 
