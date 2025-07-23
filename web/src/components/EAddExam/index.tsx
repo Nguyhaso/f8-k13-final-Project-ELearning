@@ -26,7 +26,8 @@ export default function () {
   //create question[]
   const [exam, setExam] = useState<examPayloadProp>(initialExam);
   useEffect(() => {
-    const count = exam.number_of_question || 1;
+    const count = Math.min(exam.number_of_question || 1, 60);
+
     const newQuestions = Array.from({length: count}, (_, i) => ({
       type: exam.question[i]?.type ?? 'singleSelection',
       correct_answer: '',
