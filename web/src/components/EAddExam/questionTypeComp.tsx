@@ -19,7 +19,7 @@ export default function ({type,index,onChange, onAnswer}:any)  {
       <Stack
       direction={{base:'column',md:'row'}}
       align={'center'}>
-        <Text p={'4'}>Question{index +1}: </Text>
+        <Text p={'4'} flexShrink="0">Question {index +1}: </Text>
       <NativeSelect.Root colorPalette={'blue'}>
         <NativeSelect.Field
           placeholder="Select Question Type"
