@@ -29,14 +29,14 @@ export default function () {
     <Box>
       <EHeader user={user}></EHeader>
       <ESideBar classCode={id ?? 'default'}></ESideBar>
+      <Box ml={{base:'50px',sm:'50px', md:'200px'}} p={'6'} >
       <Box
-            ml={'200px'}
-            p={'24px'}
+
             gap={'24px'}
       >
 
             <EClassMemberList memberList={memberList}></EClassMemberList>
-
+      </Box>
       </Box>
     </Box>
   )

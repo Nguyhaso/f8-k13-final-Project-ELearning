@@ -27,8 +27,8 @@ export default function () {
     <Box>
       <EHeader user={user}></EHeader>
       <ESideBar classCode={id ?? 'default'}></ESideBar>
-      <Box ml={{base:'50px',sm:'50px', md:'200px'}}>
-        <SimpleGrid columns={{base: 1, md:2}} columnGap="4" p={'6'}>
+      <Box ml={{base:'50px',sm:'50px', md:'200px'}} p={'6'}>
+        <SimpleGrid columns={{base: 1, md:2}} columnGap="4" >
           <EUploadFile/>
           <EAddExam/>
         </SimpleGrid>

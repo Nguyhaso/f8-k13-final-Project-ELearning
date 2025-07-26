@@ -8,7 +8,7 @@ import {
   NativeSelect, Text,  Stack
 } from "@chakra-ui/react";
 
-export default function ({type,index,onChange, onAnswer}:any)  {
+export default function ({type,index,onChange, onAnswer, answer}:any)  {
 
 
   const answerOptions = ["A", "B", "C", "D"];
@@ -19,11 +19,11 @@ export default function ({type,index,onChange, onAnswer}:any)  {
       <Stack
       direction={{base:'column',md:'row'}}
       align={'center'}>
-        <Text p={'4'}>Question{index +1}: </Text>
+        <Text p={'4'} flexShrink={"0"}>Question {index +1}: </Text>
       <NativeSelect.Root colorPalette={'blue'}>
         <NativeSelect.Field
           placeholder="Select Question Type"
-          value={type ?? 'singleSelection1'}
+          value={type ?? 'singleSelection'}
           onChange={onChange}
           >
           <option value="singleSelection">Single Selection</option>
@@ -36,7 +36,8 @@ export default function ({type,index,onChange, onAnswer}:any)  {
       {type === "singleSelection" && (
         <RadioGroup.Root
           colorPalette ='blue'
-          onChange={onAnswer}>
+          onValueChange={onAnswer}
+        value={answer}>
           <HStack >
             {answerOptions.map((opt, idx) => (
               <RadioGroup.Item key={idx} value={opt}>
@@ -50,12 +51,13 @@ export default function ({type,index,onChange, onAnswer}:any)  {
       )}
 
       {type === "multiSelection" && (
+        <CheckboxGroup value={answer} onValueChange={onAnswer}>
         <Fieldset.Root>
-          <CheckboxGroup>
             <Fieldset.Content>
               <HStack>
               {answerOptions.map((opt, idx) => (
-                  <Checkbox.Root key={idx} value={opt} colorPalette={'blue'}>
+                  <Checkbox.Root key={idx} value={opt} colorPalette={'blue'}
+                  >
                     <Checkbox.HiddenInput />
                     <Checkbox.Control />
                     <Checkbox.Label>{opt}</Checkbox.Label>
@@ -63,13 +65,15 @@ export default function ({type,index,onChange, onAnswer}:any)  {
                 ))}
               </HStack>
             </Fieldset.Content>
-          </CheckboxGroup>
         </Fieldset.Root>
+        </CheckboxGroup>
+
       )}
 
       {type === "freeInput" && (
-        <Field.Root>
+        <Field.Root >
           <Input placeholder="Enter Answer"
+                 value={answer} onChange={onAnswer}
                  variant="outline"
                  colorPalette={'blue'}
                  borderColor={'blue.500'}

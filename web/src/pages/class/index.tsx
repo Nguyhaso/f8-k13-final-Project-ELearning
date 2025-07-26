@@ -78,9 +78,8 @@ const{accessToken,user} = injector
     <Box>
       <EHeader user={user}></EHeader>
       <ESideBar classCode={id ?? 'default'}></ESideBar>
+      <Box ml={{base:'50px',sm:'50px', md:'200px'}} p={'6'}>
       <Grid templateColumns={'repeat(4,1fr)'}
-            ml={'200px'}
-            p={'24px'}
             gap={'24px'}
       >
         <GridItem colSpan={3}>
@@ -90,6 +89,7 @@ const{accessToken,user} = injector
           <ERecentActivities activities={recentActivities}/>
         </GridItem>
       </Grid>
+      </Box>
       {/*)*/}
     </Box>
   )

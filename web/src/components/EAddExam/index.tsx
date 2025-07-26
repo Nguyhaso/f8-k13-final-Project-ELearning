@@ -27,16 +27,32 @@ export default function () {
   const [exam, setExam] = useState<examPayloadProp>(initialExam);
   useEffect(() => {
     const count = exam.number_of_question || 1;
-    const newQuestions = Array.from({length: count}, (_, i) => ({
-      type: exam.question[i]?.type ?? 'singleSelection',
-      correct_answer: '',
-      index: i
-    }));
-    setExam((prev) => ({...prev, question: newQuestions}));
+    const newQuestions = Array.from({ length: count }, (_, i) => {
+      const prevQuestion = exam.question[i];
+      const type = prevQuestion?.type ?? 'singleSelection';
+
+      let correct_answer;
+
+      if (prevQuestion?.correct_answer !== undefined) {
+        correct_answer = prevQuestion.correct_answer;
+      } else {
+        correct_answer = type === 'multiSelection' ? [] : '';
+      }
+
+      return {
+        type,
+        correct_answer,
+        index: i,
+      };
+    });
+
+    setExam((prev) => ({ ...prev, question: newQuestions }));
+
   }, [exam.number_of_question]);
 
-  const [PayloadError, setPayloadError] = useState<payloadErrorProp>({})
 
+  const [PayloadError, setPayloadError] = useState<payloadErrorProp>({})
+//create exam
   const onCreate = async () => {
     const newError: payloadErrorProp = {}
     if (!exam.name.length) newError.name = 'Exam name cannot be empty'
@@ -49,13 +65,44 @@ export default function () {
       // api below
     }
   }
-
+// assign keydown Enter for create exam
   const pressEnter = (e: React.FormEvent) => {
     e.preventDefault();
     onCreate()
   }
+  //function handle type question change
+  const handleTypeQuestionChange= (type:string, index:number) => {
+    const defaultAnswer =
+      type === 'singleSelection' ? "":
+        type === 'multiSelection' ? []:
+          type === 'freeInput' ? "" : ""
+
+const updatedQuestions= exam.question.map((q,i) =>
+  i === index ? {...q, type: type, correct_answer:defaultAnswer } : q)
+    setExam((prev) => ({...prev, question:updatedQuestions}))
+
+
+  }
+
+  //function handle correct answer state
+  const handleAnswerChange=(answer:any, index:number, type:string) => {
+    const updated = [...exam.question];
+    if (type === 'singleSelection') updated[index].correct_answer = answer.value;
+    else if (type === 'multiSelection') updated[index].correct_answer = answer;
+    else if (type === 'freeInput') updated[index].correct_answer = answer.target.value;
+
+    setExam({...exam, question: updated});
+    console.log(exam.question);
+  }
+
   return (
-    <Box p={'24px'} bg={'white'} rounded={'xl'}>
+    <Box
+      p={'24px'}
+      bg={'white'}
+      rounded={'xl'}
+      maxHeight={'calc(100vh - 130px)'}
+      overflowY={'auto'}
+    >
       <form onSubmit={pressEnter}>
         <SimpleGrid columns={{base: 1, md: 2}} gap={{base: "24px", md: "40px"}}>
           {/*<VStack p={'24px'} bg={'white'} rounded={'xl'} w={'500px'}>*/}
@@ -126,17 +173,9 @@ export default function () {
             type={question.type}
             index={index}
             key={index}
-            onChange={(e:any) => {
-              const updatedQuestions = exam.question.map((q, i) =>
-                i === index ? {...q, type: e.currentTarget.value} : q)
-              setExam({...exam, question: updatedQuestions})
-              // console.log(e.currentTarget.value)
-            }}
-            onAnswer={(answer:any) => {
-              const updated = [...exam.question];
-              updated[index].correct_answer = answer;
-              setExam({...exam, question: updated});
-            }}
+            answer={question.correct_answer}
+            onChange={(e:any) => handleTypeQuestionChange(e.target.value, index)}
+            onAnswer={(answer:any) =>  handleAnswerChange(answer,index,question.type)}
           />
         ))}
 

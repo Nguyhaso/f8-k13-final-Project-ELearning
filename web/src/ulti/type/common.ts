@@ -56,7 +56,7 @@ export interface ExamGroupPayload{
 
 interface questionProp{
   type: string;
-  correct_answer: string;
+  correct_answer: string | string[];
   index: number;
 }
 
