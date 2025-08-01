@@ -1,4 +1,4 @@
-import {EAddClass, EAddExam, EHeader, ESideBar, EUploadFile, TableContext} from "../../components";
+import {EAddClass, EAddExam, EHeader, ESideBar, ETitlePath, EUploadFile, TableContext} from "../../components";
 import {Box, Flex, Heading, SimpleGrid} from "@chakra-ui/react";
 import {useParams} from "react-router";
 import {useContext} from "react";
@@ -28,7 +28,17 @@ export default function () {
       <EHeader user={user}></EHeader>
       <ESideBar classCode={id ?? 'default'}></ESideBar>
       <Box ml={{base:'50px',sm:'50px', md:'200px'}} p={'6'}>
-        <SimpleGrid columns={{base: 1, md:2}} columnGap="4" >
+        <ETitlePath  separator=">"
+                     separatorGap="8px"
+                     items={[
+                       { title: 'Home', url: '/' },
+                       { title: 'Courses', url: '/courses' },
+                       { title: 'React', url: '/courses/react' },
+                       { title: 'Lesson 3' }, // current page (no `url`)
+                     ]}/>
+
+        <SimpleGrid columns={{base: 1, md:2}} columnGap="4" rowGap={'4'}>
+
           <EUploadFile/>
           <EAddExam/>
         </SimpleGrid>

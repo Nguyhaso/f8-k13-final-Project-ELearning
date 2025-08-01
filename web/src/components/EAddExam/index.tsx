@@ -100,7 +100,7 @@ const updatedQuestions= exam.question.map((q,i) =>
       p={'24px'}
       bg={'white'}
       rounded={'xl'}
-      maxHeight={'calc(100vh - 130px)'}
+      maxHeight={'calc(100vh - 194px)'}
       overflowY={'auto'}
     >
       <form onSubmit={pressEnter}>

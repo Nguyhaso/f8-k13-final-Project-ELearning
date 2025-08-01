@@ -1,7 +1,7 @@
 import {Avatar, Menu, Button, Flex, Portal, HStack, Image, Stack, Text, VStack} from "@chakra-ui/react";
 import {BsHouse, BsPlusLg} from "react-icons/bs";
 import {LuChevronDown} from "react-icons/lu";
-import {useNavigate} from "react-router";
+import {useNavigate, Link as RouterLink} from "react-router";
 import {logOut, type EheaderProps} from "../../ulti";
 
 
@@ -13,7 +13,7 @@ const navigate = useNavigate();
     <Flex justify="space-between" p={'12px'} bg={'white'} >
       <HStack
       >
-        <HStack justify={'flex-start'} mr={'100px'}>
+        <HStack justify={'flex-start'} mr={'100px'} as={RouterLink} to={'/classes'}>
           <Image
             src="https://bk-exam-public.s3.ap-southeast-1.amazonaws.com/logo2.png"
             boxSize="40px"

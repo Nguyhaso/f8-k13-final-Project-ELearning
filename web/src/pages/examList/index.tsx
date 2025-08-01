@@ -1,6 +1,6 @@
 import {
   EHeader,
-  ESideBar,
+  ESideBar, ETitlePath,
   TableContext
 } from "../../components";
 import {Box, Flex, Heading} from "@chakra-ui/react";
@@ -9,20 +9,15 @@ import {EAddClass} from "../../components";
 import {useContext} from "react";
 
 
-
 export default function () {
   const {id} = useParams()
 
 
   const injector: any = useContext(TableContext)
-  const{user} = injector
+  const {user} = injector
 
 
-
-
-
-
-  if (id === 'add'){
+  if (id === 'add') {
     return (
       <Box>
         <EHeader user={user}></EHeader>
@@ -37,7 +32,10 @@ export default function () {
     <Box>
       <EHeader user={user}></EHeader>
       <ESideBar classCode={id ?? 'default'}></ESideBar>
+      <Box ml={{base: '50px', sm: '50px', md: '200px'}} p={'6'}>
+        <ETitlePath/>
 
+      </Box>
       {/*)*/}
     </Box>
   )

@@ -14,4 +14,5 @@ export {default as LoadingScreen} from './LoadingScreen'
 export {TableContext} from './ProtectedLayout'
 export {default as EAddExam} from './EAddExam'
 export {default as EUploadFile} from './EUploadFile'
+export {default as ETitlePath} from './ETitlePath'
 
