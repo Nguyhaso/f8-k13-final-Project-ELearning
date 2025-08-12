@@ -13,21 +13,25 @@ const navigate = useNavigate();
     <Flex justify="space-between" p={'12px'} bg={'white'} >
       <HStack
       >
-        <HStack justify={'flex-start'} mr={'100px'} as={RouterLink} to={'/classes'}>
-          <Image
-            src="https://bk-exam-public.s3.ap-southeast-1.amazonaws.com/logo2.png"
-            boxSize="40px"
-            fit="contain"
-            mx="auto"
-            alt="BKStar Logo"
-          />
-          <VStack align={'center'} gap={'0'}>
-            <Flex align={'center'} h={'24px'}>
-              <Text fontSize="24px" fontWeight="bold"> BK</Text>
-              <Text fontSize="24px" fontWeight="bold" color="yellow.500">Star</Text>
-            </Flex>
-            <Text>Classroom</Text>
-          </VStack>
+        <HStack justify="flex-start" mr="100px">
+          <RouterLink to="/classes">
+            <HStack>
+              <Image
+                src="https://bk-exam-public.s3.ap-southeast-1.amazonaws.com/logo2.png"
+                boxSize="40px"
+                fit="contain"
+                mx="auto"
+                alt="BKStar Logo"
+              />
+              <VStack align="center" gap="0">
+                <Flex align="center" h="24px">
+                  <Text fontSize="24px" fontWeight="bold">BK</Text>
+                  <Text fontSize="24px" fontWeight="bold" color="yellow.500">Star</Text>
+                </Flex>
+                <Text>Classroom</Text>
+              </VStack>
+            </HStack>
+          </RouterLink>
         </HStack>
         <Text fontWeight={'bolder'}>{pageName}</Text>
       </HStack>

@@ -10,7 +10,7 @@ import {useContext} from "react";
 
 
 export default function () {
-  const {id} = useParams()
+  const {id, examList} = useParams()
 
 
   const injector: any = useContext(TableContext)
@@ -33,7 +33,13 @@ export default function () {
       <EHeader user={user}></EHeader>
       <ESideBar classCode={id ?? 'default'}></ESideBar>
       <Box ml={{base: '50px', sm: '50px', md: '200px'}} p={'6'}>
-        <ETitlePath/>
+        <ETitlePath  separator=">"
+                     separatorGap="8px"
+                     items={[
+                       { title: 'Home', url: '/classes' },
+                       { title: `Class ${id}`, url: `/class/${id}/exams` },
+                       { title: `Exam ${examList}` },
+                     ]}/>
 
       </Box>
       {/*)*/}

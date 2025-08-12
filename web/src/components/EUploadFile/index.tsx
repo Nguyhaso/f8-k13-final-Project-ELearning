@@ -19,13 +19,21 @@ export default function () {
     }
   }, [file]);
 
+  const handleFileChange = (e:any) => {
+    const input = e.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      setFile(input.files[0]);
+    }
+  }
+
   return (
     <Box p="24px" bg="white" rounded="xl" maxHeight={'calc(100vh - 194px)'}
          overflowY={'auto'}>
 
 
       <FileUpload.Root accept={["image/*", "application/pdf"]}
-                       onChange={files => setFile(files.target.files[0])}
+                         onChange={handleFileChange}
+
       >
         {!file ? (
           <>

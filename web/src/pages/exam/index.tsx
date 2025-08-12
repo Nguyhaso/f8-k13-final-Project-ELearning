@@ -5,7 +5,7 @@ import {useContext} from "react";
 
 
 export default function () {
-  const {id} = useParams()
+  const {id, examList} = useParams()
 
 
   const injector: any = useContext(TableContext)
@@ -31,10 +31,10 @@ export default function () {
         <ETitlePath  separator=">"
                      separatorGap="8px"
                      items={[
-                       { title: 'Home', url: '/' },
-                       { title: 'Courses', url: '/courses' },
-                       { title: 'React', url: '/courses/react' },
-                       { title: 'Lesson 3' }, // current page (no `url`)
+                       { title: 'Home', url: '/classes' },
+                       { title: `Class ${id}`, url: `/class/${id}/exams` },
+                       { title: `Exam ${examList}`, url: `/class/${id}/exams/${examList}` },
+                       { title: 'Adding exam' }, // current page (no `url`)
                      ]}/>
 
         <SimpleGrid columns={{base: 1, md:2}} columnGap="4" rowGap={'4'}>
