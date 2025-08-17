@@ -1,6 +1,5 @@
 import {
   Breadcrumb as ChakraBreadcrumb,
-  Show,
   type SystemStyleObject,
 } from "@chakra-ui/react"
 import * as React from "react"
@@ -13,8 +12,8 @@ export interface BreadcrumbProps extends ChakraBreadcrumb.RootProps {
 
 export default React.forwardRef<HTMLDivElement, BreadcrumbProps>(
   function BreadcrumbRoot(props, ref) {
-    const { separator, separatorGap, items, ...rest } = props
-console.log(ref)
+    const {separator, separatorGap, items, ...rest} = props
+    console.log(ref)
     return (
       <ChakraBreadcrumb.Root ref={ref} {...rest}>
         <ChakraBreadcrumb.List gap={separatorGap}>
@@ -22,25 +21,26 @@ console.log(ref)
             const last = index === items.length - 1
             return (
               <React.Fragment key={index}>
-                <ChakraBreadcrumb.Item>
-                  <ChakraBreadcrumb.Link href={item.url}>
-                    {item.title}
-                  </ChakraBreadcrumb.Link>
-                </ChakraBreadcrumb.Item>
-                <Show
-                  when={last}
-                  fallback={
-                    <ChakraBreadcrumb.Separator>
-                      {separator}
-                    </ChakraBreadcrumb.Separator>
-                  }
-                >
+                {last ? (
                   <ChakraBreadcrumb.Item>
                     <ChakraBreadcrumb.CurrentLink>
                       {item.title}
                     </ChakraBreadcrumb.CurrentLink>
                   </ChakraBreadcrumb.Item>
-                </Show>
+                ) : (
+                  <>
+                    <ChakraBreadcrumb.Item>
+                      <ChakraBreadcrumb.Link href={item.url}>
+                        {item.title}
+                      </ChakraBreadcrumb.Link>
+                    </ChakraBreadcrumb.Item>
+                    {separator && (
+                      <ChakraBreadcrumb.Separator>
+                        {separator}
+                      </ChakraBreadcrumb.Separator>
+                    )}
+                  </>
+                )}
               </React.Fragment>
             )
           })}

@@ -10,6 +10,7 @@ import ExamGroups from "../pages/examGroups";
 import ExamList from "../pages/examList";
 import {ProtectedLayout} from "../components";
 import Exam from "../pages/exam";
+import NotFound404 from "../pages/404";
 
 
 const router = createBrowserRouter([
@@ -72,6 +73,12 @@ const router = createBrowserRouter([
       <ProtectedLayout>
         <Exam/>
       </ProtectedLayout>
+  },
+  {
+    path: "/*",
+    element:
+      <NotFound404/>
+
   },
 ]);
 export default router;
